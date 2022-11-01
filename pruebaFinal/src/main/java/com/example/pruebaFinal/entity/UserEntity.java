@@ -4,7 +4,7 @@ package com.example.pruebaFinal.entity;
 
 public class UserEntity {
 	
-	private long id = (long) Math.random()*10+1;
+	private int id;
 	
 	private String nombre;
 	
@@ -17,11 +17,11 @@ public class UserEntity {
 		
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

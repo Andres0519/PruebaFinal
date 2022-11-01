@@ -14,14 +14,6 @@ public class UserController {
 	UserEntity userA;
 	ArrayList<UserEntity> lista = new ArrayList<>();
 
-	UserController(){
-		
-		userA = new UserEntity("Andres", "andres@test.com");
-		UserEntity user2 = new UserEntity("Nuevo", "NOOOOO");
-		lista.add(userA);
-		lista.add(user2);
-		
-	}
 
 	public List<UserEntity> lista(){
 		

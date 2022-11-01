@@ -1,21 +1,30 @@
 package com.example.pruebaFinal.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.pruebaFinal.PruebaFinalApplication;
+import com.example.pruebaFinal.controller.mapper.UserMapper;
 import com.example.pruebaFinal.entity.UserEntity;
 
+@RestController
 @Controller
 public class UserRestController {
-
-	UserController user = new UserController();
+	
+	@Autowired
+	private UserMapper map;
+	
+	public static Logger LOG = LoggerFactory.getLogger(PruebaFinalApplication.class);
 
 	@GetMapping("/index")
 	public String mostrar(Model model) {
 
-		model.addAttribute("users", user.lista());
+		model.addAttribute("users", map.findAllUsers());
+		LOG.info(map.findAllUsers().toString());
 
 		return "index";
 	}
@@ -29,41 +38,32 @@ public class UserRestController {
 	@PostMapping("/agregarUser")
 	public String agregar(UserEntity user, Model model) {
 
-		this.user.agregar(user);
+		map.insertUser(user);
 
 		return "redirect:/index";
 	}
 
 	@GetMapping("/editar/{id}")
-	public String editar(@PathVariable("id") Long id, Model model) {
+	public String editar(@PathVariable("id") int id, Model model) {
 		
-		UserEntity usuario = user.buscar(id);
-		
-		if (usuario == null) {
-			
-			return "index";
-			
-		}
-		
-		model.addAttribute("userEntity" , usuario);
-		user.eliminar(id);
+		model.addAttribute(map.findUserById(id));
 
 		return "editar";
 	}
 
-	@PostMapping("/editarUser/{id}")
-	public String editarUser(UserEntity user) {
+	@PutMapping("/editarUser/{id}")
+	public String editarUser(UserEntity user, @PathVariable("id") int id) {
 		
-		this.user.editar(user);
+		map.updateUser(user, id);
 
 		return "redirect:/index";
 
 	}
 	
-	@GetMapping("/eliminar/{id}")
-	public String eliminar(@PathVariable("id") Long id) {
+	@DeleteMapping("/eliminar/{id}")
+	public String eliminar(@PathVariable("id") int id) {
 		
-		user.eliminar(id);
+		map.deleteUser(id);
 		
 		return "redirect:/index";
 		
