@@ -12,7 +12,6 @@ import com.example.pruebaFinal.controller.mapper.UserMapper;
 import com.example.pruebaFinal.entity.UserEntity;
 
 @RestController
-@Controller
 public class UserRestController {
 	
 	@Autowired
