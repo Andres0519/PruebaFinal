@@ -32,9 +32,10 @@ public class UserRestController {
 		modelAndView.setStatus(HttpStatus.OK);
 		
 		List<UserEntity> allusers = userService.findAllUsers();
-		
+		String totalDatos = userService.totalDatos(null);
 		
 		modelAndView.addObject("users" , allusers);
+		modelAndView.addObject("total",totalDatos);
 		modelAndView.setViewName("index.html");
 		
 		return modelAndView;
@@ -53,10 +54,17 @@ public class UserRestController {
 	@PostMapping("/agregarUser")
 	public ModelAndView agregarUser(UserEntity user) {
 		
-		ModelAndView modelAndView = new ModelAndView();
 		userService.insertUser(user);
-		modelAndView.setViewName("index.html");
-		return modelAndView;
+		
+		return info();
+		
+	}
+	
+	@GetMapping("/eliminar/{id}")
+	public ModelAndView deleteUser(@PathVariable("id") int id) {
+		
+		userService.deleteUser(id);
+		return info();
 		
 	}
 	

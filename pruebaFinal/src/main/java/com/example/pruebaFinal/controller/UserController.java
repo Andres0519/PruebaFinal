@@ -30,6 +30,18 @@ public class UserController {
 		mapper.insertUser(userEntity);
 		
 	}
+	
+	public String totalDatos(String dato) {
+		
+		return mapper.totalDatos(dato);
+		
+	}
+	
+	public void deleteUser(int id) {
+		
+		mapper.deleteUser(id);
+		
+	}
 
 	
 

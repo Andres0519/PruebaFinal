@@ -18,6 +18,8 @@ public List<UserEntity> findAllUsers();
 
 public UserEntity findUserById(int id);
 
+public String totalDatos(String dato);
+
 public void insertUser(UserEntity userEntity);
 
 public void updateUser(UserEntity userEntity, int id);

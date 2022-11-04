@@ -25,5 +25,16 @@ public class UserService {
 		userController.insertUser(entity);
 		
 	}
+	
+	public String totalDatos(String datos){
+		
+		return userController.totalDatos(datos);
+		
+	}
+	
+	public void deleteUser(int id) {
+		
+		userController.deleteUser(id);
+	}
 
 }

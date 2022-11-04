@@ -15,4 +15,17 @@
     
     </insert>
     
+     <select id="totalDatos" statementType="CALLABLE"  parameterType="String" resultType="String">
+        {call totalDatos(
+                        #{para,   jdbcType=VARCHAR, javaType=java.lang.String, mode=IN}
+         )
+        }
+    </select>  
+    
+    <delete id="deleteUser" parameterType="int">
+    
+    	delete from "Users" where id = #{id}
+    
+    </delete>
+    
 </mapper>
