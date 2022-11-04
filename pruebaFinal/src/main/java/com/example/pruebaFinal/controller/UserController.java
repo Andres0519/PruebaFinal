@@ -1,70 +1,36 @@
 package com.example.pruebaFinal.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.text.html.parser.Entity;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.example.pruebaFinal.controller.mapper.UserMapper;
 import com.example.pruebaFinal.entity.UserEntity;
 
+@Component
 public class UserController {
 	
-	UserEntity userA;
-	ArrayList<UserEntity> lista = new ArrayList<>();
-
-
-	public List<UserEntity> lista(){
+	
+	@Autowired
+	private UserMapper mapper;
+	
+	public List<UserEntity> findAllUsers(){
 		
-		return lista;
+		return mapper.findAllUsers();
 		
 	}
 	
-	public void agregar(UserEntity user) {
+	public void insertUser(UserEntity userEntity) {
 		
-		userA = new UserEntity(user.getNombre(), user.getCorreo());
-		lista.add(userA);
-		
-		
-	}
-	
-	public UserEntity buscar(Long id) {
-		
-		for (int i = 0; i < lista.size(); i++) {
-			
-			if (lista.get(i).getId() == id) {
-				
-				return lista.get(i);
-				
-			}
-			
-		}
-		
-		return null;
+		mapper.insertUser(userEntity);
 		
 	}
 
-	public void eliminar(Long usuario) {
-		
-		UserEntity user = buscar(usuario);
-		lista.remove(user);
-		
-		
-	}
-	
-	public void editar(UserEntity usuario) {
-		
-		String b = usuario.getNombre();
-		String c = usuario.getCorreo();
-		
-		UserEntity user = new UserEntity(b, c);
-		lista.add(user);
-		
-		
-		
-	}
-	
 	
 
 }
