@@ -68,5 +68,14 @@ public class UserRestController {
 		
 	}
 	
+	//Intento AngularJS
+	@GetMapping("/mostrar")
+	public List<UserEntity> entities(Model model){
+		
+		model.addAttribute("lista", userService.findAllUsers());
+		return userService.findAllUsers();
+		
+	}
+	
 
 }
